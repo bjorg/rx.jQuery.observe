@@ -1,0 +1,62 @@
+<html>
+	<head>
+		<script type="text/javascript" src="jquery.js"></script>
+		<script type="text/javascript" src="jquery.event.destroyed.js"></script>
+		<script type="text/javascript" src="rx.js"></script>
+		<script type="text/javascript" src="rx.jQuery.js"></script>
+		<script type="text/javascript" src="rx.jQuery.observe.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				var obs = $(document).toObservable('mousemove').Select(function(e) { return '( ' + e.pageX + ', ' + e.pageY + ' )'; });
+				obs.Subscribe(function(value) {
+					$('#always').text(value);
+				});
+				$('#enable').click(function() {
+					$('#one').observe(obs);
+					$('#two').observe(obs);
+					$('#three').observe(obs);
+				});
+				$('#disable').click(function() {
+					$('#one').observe();
+					$('#two').observe();
+					$('#three').observe();
+				});
+				$('#enable2').click(function() {
+					$('#one').observe('offset', $(document).toObservable('mousemove').Select(function(e) { return { left: e.pageX, top: e.pageY }; }));
+				});
+				$('#disable2').click(function() {
+					$('#one').observe('offset');
+				});
+				$('#disable3').click(function() {
+					$('#one').observe('destroy');
+					$('#two').observe('destroy');
+					$('#three').observe('destroy');
+				});
+				$('#remove1').click(function() {
+					$('#one').remove();
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<span id="always">init</span>
+		<br/>
+		<span id="one">init</span>
+		<br/>
+		<div id="two">init</div>
+		<br/>
+		<input id="three" type="text" value="init" />
+		<br/>
+		<input id="enable" type="button" value="Enable"/>
+		<br/>
+		<input id="disable" type="button" value="Disable" />
+		<br/>
+		<input id="enable2" type="button" value="Enable2"/>
+		<br/>
+		<input id="disable2" type="button" value="Disable2" />
+		<br/>
+		<input id="disable3" type="button" value="Disable All" />
+		<br/>
+		<input id="remove1" type="button" value="Remove" />
+	</body>
+</html>
