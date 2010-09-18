@@ -1,51 +1,20 @@
 /*
- * PREREQ:
- *     jquery.js
- *     jquery.event.destroyed.js (optional, see note below)
- *     rx.js
+ * rx.jQuery.observe.js
+ * Copyright (C) 2010 Steve G. Bjorg
  *
- * NOTE:
- *     For automatic subscriptions clean-up, this plug-in requires the 
- *     jquery 'destroyed' special event (see jquery.event.destroyed.js).
- *
- * FUNCTIONS:
- *     .observe(observable)
- *         Subscribe DOM elements to changes in the observable. The subscribed 
- *         DOM property to update is based on the element type: 'val' for input 
- *         elements and 'text' for all others.
- *
- *     .observe()
- *         Unsubscribe DOM elements fom changes in the observable. The 
- *         unsubscribed DOM property is based on the element type: 'val' for 
- *         input elements and 'text' for all others.
- *
- *     .observe('html', observable)
- *     .observe('text', observable)
- *     .observe('val', observable)
- *     .observe('height', observable)
- *     .observe('width', observable)
- *     .observe('offset', observable)
- *     .observe('css', observable)
- *     .observe('@attribute-name', observable)
- *         Subscribe DOM elements to changes in the observable. The specified 
- *         DOM property is subscribed to updates.
- *
- *     .observe('html')
- *     .observe('text')
- *     .observe('val')
- *     .observe('height')
- *     .observe('width')
- *     .observe('offset')
- *     .observe('css')
- *     .observe('@attribute-name')
- *         Unsubscribe DOM elements fom changes in the observable. The specified 
- *         DOM property is unsubscribed.
- *
- *     .observe('destroy')
- *         Unsubscribe all subscriptions in DOM elements.
- *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
-
+ 
 (function($) {	
 
 	// helper function that returns a function to update the desired property
